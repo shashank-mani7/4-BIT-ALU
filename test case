@@ -1,0 +1,25 @@
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg [3:0] a, b ;
+  reg [2:0] sel; 
+  wire [4:0] result;
+
+  alu a1(a,b,sel,result);
+
+initial 
+begin
+	       sel=3'b000;//add
+  		   a=4'b0000; b=4'b0000; // A = 0, B = 0
+     #50   a=4'b0011; b=4'b0001; // A = 3, B = 1
+     #50   a=4'b1111; b=4'b0010; // A = 3, B = 2
+  #50;
+end
+
+  initial 
+    $monitor ($time , " a=%d, b%d, sel=%d, result=%d",a,b,sel,result);
+  
+  initial begin
+  $dumpfile("dump.vcd"); $dumpvars;
+  end
+    endmodule
